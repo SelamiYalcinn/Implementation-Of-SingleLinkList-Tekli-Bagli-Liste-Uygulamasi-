@@ -81,7 +81,7 @@ class List_
         iter->node_next=nullptr;
         break;
       }
-      iter=iter->next;
+      iter=iter->node_next;
     }
   }
   
@@ -107,7 +107,7 @@ class List_
   void PrintList()
   {
     iter=mem_Head;
-    for(iter=mem_Head;iter->node_next!=nullptr;iter=iter->next)
+    for(iter=mem_Head;iter->node_next!=nullptr;iter=iter->node_next)
         std::cout<<"key: "<<iter->node_key<<" el: "<<iter->node_el<<'\n';
     std::cout<<"key: "<<iter->node_key<<" el: "<<iter->node_el<<'\n';
   }
@@ -120,23 +120,25 @@ int main()
 {
   List_* lst=new List_();
   for(int i=0;i<5;++i)
-      lst->AddOverLast(new List(i,i+1));
+      lst->AddOverLast(new Node(i,i+1));
   lst->PrintList();
   std::cout<<"\n-----\n";
   
-  lst->AddFirstNode(new List_(50,51));
+  lst->AddFirstNode(new Node(50,51));
   lst->PrintList();
   std::cout<<"\n-----\n";
   
   lst->DeleteFromLastNode();
   lst->DeleteWithKey(2);
   lst->PrintList();
+  return 0;
 }
 
 //=== Program OUTPUT ===//
 /*
   0-) Node added...
   1-) Node added...
+  2-) Node added...
   3-) Node added...
   key: 0 el:1
   key: 1 el:2
@@ -153,7 +155,7 @@ int main()
   key: 4 el:5
   
   ------
-  key:50 el 51
+  key:50 el: 51
   key: 0 el:1
   key: 1 el:2
   key: 3 el:4
