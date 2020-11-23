@@ -59,4 +59,16 @@ class List_
   }
   
   //Add the over first Node..
+  void AddFirstNode(Node* n)
+  {
+    if(!mem_Head)
+       mem_Head=n;
+    else
+    {
+      n->node_next = mem_Head;
+      mem_Head = n;
+    }
+  }
+  
+  //Delete the Last Node
 };
