@@ -71,4 +71,92 @@ class List_
   }
   
   //Delete the Last Node
+  void DeleteFromLastNode()
+  {
+    iter=mem_Head;
+    while(iter->node_next)
+    {
+      if(!(iter->node_next->node_next))
+      {
+        iter->node_next=nullptr;
+        break;
+      }
+      iter=iter->next;
+    }
+  }
+  
+  void DeleteWithKey(int k)
+  {
+    auto mem = HaveNode(k);
+    iter = mem_Head;
+    if(!mem)
+        std::cout<<"key didn't find in the list...\n";
+    else
+    {
+      while(iter->node_next)
+      {
+        if(iter->node_next->node_key == mem->node_key)
+            iter->node_next = mem->node_next;
+        
+        iter=iter->node_next;
+      }
+    }
+  }
+  
+  //Print list using for loop//For döngüsü ile listeyi ekrana basan fonk.
+  void PrintList()
+  {
+    iter=mem_Head;
+    for(iter=mem_Head;iter->node_next!=nullptr;iter=iter->next)
+        std::cout<<"key: "<<iter->node_key<<" el: "<<iter->node_el<<'\n';
+    std::cout<<"key: "<<iter->node_key<<" el: "<<iter->node_el<<'\n';
+  }
+  
+  //Destructor
+  ~List_(){delete mem_Head; delete iter;}
 };
+
+int main()
+{
+  List_* lst=new List_();
+  for(int i=0;i<5;++i)
+      lst->AddOverLast(new List(i,i+1));
+  lst->PrintList();
+  std::cout<<"\n-----\n";
+  
+  lst->AddFirstNode(new List_(50,51));
+  lst->PrintList();
+  std::cout<<"\n-----\n";
+  
+  lst->DeleteFromLastNode();
+  lst->DeleteWithKey(2);
+  lst->PrintList();
+}
+
+//=== Program OUTPUT ===//
+/*
+  0-) Node added...
+  1-) Node added...
+  3-) Node added...
+  key: 0 el:1
+  key: 1 el:2
+  key: 2 el:3
+  key: 3 el:4
+  key: 4 el:5
+  
+  -----
+  key:50 el 51
+  key: 0 el:1
+  key: 1 el:2
+  key: 2 el:3
+  key: 3 el:4
+  key: 4 el:5
+  
+  ------
+  key:50 el 51
+  key: 0 el:1
+  key: 1 el:2
+  key: 3 el:4
+  
+*/
+//=====================//
